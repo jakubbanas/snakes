@@ -1,0 +1,14 @@
+html {
+    height: 100%;
+}
+
+body {
+    background: silver;
+    text-align: center;
+}
+
+.score {
+    font-family: verdana;
+    font-size: 2em;
+    color: #fff;
+}
