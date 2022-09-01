@@ -1,4 +1,10 @@
-export type BoardState = number[][];
+export type BoardState = BoardElement[][];
+
+export enum BoardElement {
+  snake = 1,
+  apple = "a",
+  empty = 0,
+}
 
 class Board {
   private state: BoardState;
@@ -17,7 +23,7 @@ class Board {
     return this.state;
   }
 
-  public update(x: number, y: number, value = 1): void {
+  public update(x: number, y: number, value = BoardElement.snake): void {
     try {
       this.state[x][y] = value;
     } catch {}
@@ -25,7 +31,7 @@ class Board {
 
   public reset(): void {
     this.state = Array.from({ length: this.size }, () =>
-      Array(this.size).fill(0)
+      Array(this.size).fill(BoardElement.empty)
     );
   }
 }

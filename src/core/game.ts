@@ -1,7 +1,13 @@
 import Snake from "./snake";
 import { Color, SnakeUI } from "../types";
-import Board, { BoardState } from "./board";
+import Board, { BoardElement, BoardState } from "./board";
 import rulesManager, { Rule, RuleResult } from "../rules/rulesManager";
+
+const boardElementColorMapping: { [key in BoardElement]: Color } = {
+  [BoardElement.empty]: Color.WHITE,
+  [BoardElement.apple]: Color.RED,
+  [BoardElement.snake]: Color.BLACK,
+};
 
 class Game {
   private board: Board;
@@ -24,10 +30,12 @@ class Game {
   private drawBoardState(boardState: BoardState): void {
     for (let x = 0; x < boardState.length; x++) {
       for (let y = 0; y < boardState[x].length; y++) {
-        if (boardState[x][y] === 0) {
+        const boardElement = boardState[x][y];
+        if (boardElement === BoardElement.empty) {
           continue;
         }
-        this.ui.drawSquare(x, y, Color.RED);
+        const color = boardElementColorMapping[boardElement];
+        this.ui.drawSquare(x, y, color);
       }
     }
   }
