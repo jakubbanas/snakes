@@ -8,7 +8,7 @@ export default (snakePosition: SnakePosition, boardState: BoardState) => {
 
   const colision = snakePosition.find((position) => {
     const [x, y] = position;
-    return x > boardWidth || y > boardHeigth || x < 0 || y < 0;
+    return x >= boardWidth || y >= boardHeigth || x < 0 || y < 0;
   });
 
   if (colision) {

@@ -9,7 +9,7 @@ describe("Wall collision rule", () => {
   ];
 
   it("should colision be detected if snake cross the board on right", () => {
-    const testSnakePosition: SnakePosition = [[3, 0]];
+    const testSnakePosition: SnakePosition = [[2, 0]];
 
     const result = wallCollisionRule(testSnakePosition, testBoardState);
 
@@ -33,7 +33,7 @@ describe("Wall collision rule", () => {
   });
 
   it("should colision be detected if snake cross the board on bottom", () => {
-    const testSnakePosition: SnakePosition = [[0, 3]];
+    const testSnakePosition: SnakePosition = [[0, 2]];
 
     const result = wallCollisionRule(testSnakePosition, testBoardState);
 
