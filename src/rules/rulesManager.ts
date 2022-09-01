@@ -5,6 +5,7 @@ export enum RuleResult {
   GameOver,
   SnakeExtend,
   NoAction,
+  CreateElement,
 }
 
 export type Rule = (

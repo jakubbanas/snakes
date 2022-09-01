@@ -57,15 +57,23 @@ class Game {
       switch (result) {
         case RuleResult.GameOver:
           this.reset();
+          break;
+        case RuleResult.CreateElement:
+          this.board.update(5, 5, BoardElement.apple);
+          console.log("apple");
+
+          break;
       }
     });
   }
 
   public loop() {
-    this.checkRules();
     this.ui.reset();
     this.board.reset();
-    this.snake.getPosition().forEach(([x, y]) => this.board.update(x, y));
+    this.checkRules();
+    this.snake
+      .getPosition()
+      .forEach(([x, y]) => this.board.update(x, y, BoardElement.snake));
     this.drawBoardState(this.board.getState());
     this.snake.move();
   }
