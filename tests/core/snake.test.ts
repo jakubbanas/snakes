@@ -2,13 +2,6 @@ import Snake from "../../src/core/snake";
 import { Color, Direction } from "../../src/types";
 
 describe("Snake", () => {
-  it("should return snake color", () => {
-    const testColor = Color.RED;
-    const snake = new Snake("test_snake", testColor);
-
-    expect(snake.getColor()).toBe(testColor);
-  });
-
   it("should return snake name", () => {
     const testName = "test_snake";
     const snake = new Snake(testName);

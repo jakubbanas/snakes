@@ -11,14 +11,9 @@ const movementMaping: MovementMaping = {
 
 class Snake {
   private movingDirection: Direction = Direction.RIGHT;
-  private color: Color;
   private name: string;
   private position: SnakePosition;
   private isEating = false;
-
-  public getColor(): Color {
-    return this.color;
-  }
 
   public getName(): string {
     return this.name;
@@ -45,13 +40,8 @@ class Snake {
     this.movingDirection = Direction.RIGHT;
   }
 
-  constructor(
-    name: string,
-    color: Color = Color.PURPLE,
-    position: SnakePosition = [[0, 0]]
-  ) {
+  constructor(name: string, position: SnakePosition = [[0, 0]]) {
     this.name = name;
-    this.color = color;
     this.position = position;
   }
 
