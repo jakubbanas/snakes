@@ -24,6 +24,7 @@ class Game {
   private gameObjects: GameObject[] = [];
   private ui: SnakeUI;
   private rules: Rule[];
+  private score: number = 0;
 
   constructor(
     snake: Snake,
@@ -50,11 +51,17 @@ class Game {
     }
   }
 
+  setScore(score: number) {
+    this.score = score;
+    this.ui.setScore(score);
+  }
+
   private reset() {
     this.ui.reset();
     this.board.reset();
     this.snake.reset();
     this.gameObjects = [];
+    this.setScore(0);
   }
 
   private checkRules(): RuleResult[] {
@@ -77,6 +84,7 @@ class Game {
         case RuleResultType.SnakeExtend:
           this.snake.feed();
           this.gameObjects = [];
+          this.setScore(this.score + 1);
           break;
       }
     });

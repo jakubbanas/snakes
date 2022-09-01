@@ -5,6 +5,10 @@ class CanvasUI implements SnakeUI {
   private cellSize: number;
   private context: CanvasRenderingContext2D;
 
+  setScore(score: number) {
+    document.getElementById("score").innerHTML = String(score);
+  }
+
   public drawSquare(x: number, y: number, color: string) {
     this.context.fillStyle = color;
     this.context.fillRect(

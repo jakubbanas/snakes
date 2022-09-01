@@ -22,4 +22,5 @@ export type MovementMaping = {
 export interface SnakeUI {
   drawSquare: (x: number, y: number, color: Color) => void;
   reset: () => void;
+  setScore: (score: number) => void;
 }
