@@ -8,7 +8,11 @@ describe("Snake movement", () => {
     feed: jest.fn(),
     getPosition: () => [[0, 0]],
   } as any;
-  const uiMock = { reset: jest.fn(), drawSquare: jest.fn() } as any;
+  const uiMock = {
+    reset: jest.fn(),
+    drawSquare: jest.fn(),
+    setScore: jest.fn(),
+  } as any;
   const testBoardSize = 5;
 
   afterEach(() => {
