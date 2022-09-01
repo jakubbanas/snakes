@@ -5,6 +5,7 @@ describe("Snake movement", () => {
   const snakeMock = {
     reset: jest.fn(),
     move: jest.fn(),
+    feed: jest.fn(),
     getPosition: () => [[0, 0]],
   } as any;
   const uiMock = { reset: jest.fn(), drawSquare: jest.fn() } as any;
@@ -36,5 +37,21 @@ describe("Snake movement", () => {
 
     expect(snakeMock.reset).toBeCalled();
     expect(uiMock.reset).toBeCalled();
+  });
+
+  it("shold extend snake when rule has such action", () => {
+    const snakeExtendingRuleSet = [
+      () => ({ type: RuleResultType.SnakeExtend }),
+    ];
+    const game = new Game(
+      snakeMock,
+      uiMock,
+      testBoardSize,
+      snakeExtendingRuleSet
+    );
+
+    game.loop();
+
+    expect(snakeMock.feed).toBeCalled();
   });
 });

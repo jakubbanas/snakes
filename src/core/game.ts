@@ -74,6 +74,10 @@ class Game {
         case RuleResultType.CreateGameObject:
           this.gameObjects.push(result.payload);
           break;
+        case RuleResultType.SnakeExtend:
+          this.snake.feed();
+          this.gameObjects = [];
+          break;
       }
     });
   }
