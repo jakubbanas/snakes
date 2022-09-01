@@ -1,11 +1,17 @@
 import { BoardState } from "../core/board";
+import { GameObject } from "../core/game";
 import { SnakePosition } from "../core/snake";
 
-export enum RuleResult {
+export enum RuleResultType {
   GameOver,
   SnakeExtend,
   NoAction,
-  CreateElement,
+  CreateGameObject,
+}
+
+export interface RuleResult {
+  type: RuleResultType;
+  payload?: GameObject;
 }
 
 export type Rule = (
@@ -20,6 +26,6 @@ const checkRules = (
 ): RuleResult[] =>
   rules
     .map((rule) => rule(snakePosition, boardState))
-    .filter((result) => result !== RuleResult.NoAction);
+    .filter((result) => result.type !== RuleResultType.NoAction);
 
 export default { checkRules };

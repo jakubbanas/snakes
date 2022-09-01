@@ -1,7 +1,11 @@
 import Snake from "./snake";
-import { Color, SnakeUI } from "../types";
+import { Color, Coordinate, SnakeUI } from "../types";
 import Board, { BoardElement, BoardState } from "./board";
-import rulesManager, { Rule, RuleResult } from "../rules/rulesManager";
+import rulesManager, {
+  Rule,
+  RuleResult,
+  RuleResultType,
+} from "../rules/rulesManager";
 
 const boardElementColorMapping: { [key in BoardElement]: Color } = {
   [BoardElement.empty]: Color.WHITE,
@@ -9,9 +13,15 @@ const boardElementColorMapping: { [key in BoardElement]: Color } = {
   [BoardElement.snake]: Color.BLACK,
 };
 
+export interface GameObject {
+  type: BoardElement;
+  position: Coordinate;
+}
+
 class Game {
   private board: Board;
   private snake: Snake;
+  private gameObjects: GameObject[] = [];
   private ui: SnakeUI;
   private rules: Rule[];
 
@@ -44,36 +54,43 @@ class Game {
     this.ui.reset();
     this.board.reset();
     this.snake.reset();
+    this.gameObjects = [];
   }
 
-  private checkRules(): void {
-    const ruleResults = rulesManager.checkRules(
+  private checkRules(): RuleResult[] {
+    return rulesManager.checkRules(
       this.snake.getPosition(),
       this.board.getState(),
       this.rules
     );
+  }
 
+  private applyRuleResults(ruleResults: RuleResult[]): void {
     ruleResults.forEach((result) => {
-      switch (result) {
-        case RuleResult.GameOver:
+      switch (result.type) {
+        case RuleResultType.GameOver:
           this.reset();
           break;
-        case RuleResult.CreateElement:
-          this.board.update(5, 5, BoardElement.apple);
-          console.log("apple");
-
+        case RuleResultType.CreateGameObject:
+          this.gameObjects.push(result.payload);
           break;
       }
     });
   }
 
   public loop() {
+    const ruleResults = this.checkRules();
     this.ui.reset();
     this.board.reset();
-    this.checkRules();
+    this.applyRuleResults(ruleResults);
     this.snake
       .getPosition()
       .forEach(([x, y]) => this.board.update(x, y, BoardElement.snake));
+    this.gameObjects.forEach((gameObject) => {
+      const { position, type } = gameObject;
+      const [x, y] = position;
+      this.board.update(x, y, type);
+    });
     this.drawBoardState(this.board.getState());
     this.snake.move();
   }

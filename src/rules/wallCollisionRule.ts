@@ -1,8 +1,11 @@
 import { BoardState } from "../core/board";
 import { SnakePosition } from "../core/snake";
-import { RuleResult } from "./rulesManager";
+import { RuleResult, RuleResultType } from "./rulesManager";
 
-export default (snakePosition: SnakePosition, boardState: BoardState) => {
+export default (
+  snakePosition: SnakePosition,
+  boardState: BoardState
+): RuleResult => {
   const boardHeigth = boardState.length;
   const boardWidth = boardState[0].length;
 
@@ -12,8 +15,8 @@ export default (snakePosition: SnakePosition, boardState: BoardState) => {
   });
 
   if (colision) {
-    return RuleResult.GameOver;
+    return { type: RuleResultType.GameOver };
   }
 
-  return RuleResult.NoAction;
+  return { type: RuleResultType.NoAction };
 };

@@ -1,5 +1,5 @@
 import { SnakePosition } from "../../src/core/snake";
-import { RuleResult } from "../../src/rules/rulesManager";
+import { RuleResultType } from "../../src/rules/rulesManager";
 import wallCollisionRule from "../../src/rules/wallCollisionRule";
 
 describe("Wall collision rule", () => {
@@ -13,7 +13,7 @@ describe("Wall collision rule", () => {
 
     const result = wallCollisionRule(testSnakePosition, testBoardState);
 
-    expect(result).toBe(RuleResult.GameOver);
+    expect(result).toStrictEqual({ type: RuleResultType.GameOver });
   });
 
   it("should colision be detected if snake cross the board on left", () => {
@@ -21,7 +21,7 @@ describe("Wall collision rule", () => {
 
     const result = wallCollisionRule(testSnakePosition, testBoardState);
 
-    expect(result).toBe(RuleResult.GameOver);
+    expect(result).toStrictEqual({ type: RuleResultType.GameOver });
   });
 
   it("should colision be detected if snake cross the board on top", () => {
@@ -29,7 +29,7 @@ describe("Wall collision rule", () => {
 
     const result = wallCollisionRule(testSnakePosition, testBoardState);
 
-    expect(result).toBe(RuleResult.GameOver);
+    expect(result).toStrictEqual({ type: RuleResultType.GameOver });
   });
 
   it("should colision be detected if snake cross the board on bottom", () => {
@@ -37,7 +37,7 @@ describe("Wall collision rule", () => {
 
     const result = wallCollisionRule(testSnakePosition, testBoardState);
 
-    expect(result).toBe(RuleResult.GameOver);
+    expect(result).toStrictEqual({ type: RuleResultType.GameOver });
   });
 
   it("should return no action if no wall colision detected", () => {
@@ -45,6 +45,6 @@ describe("Wall collision rule", () => {
 
     const result = wallCollisionRule(testSnakePosition, testBoardState);
 
-    expect(result).toBe(RuleResult.NoAction);
+    expect(result).toStrictEqual({ type: RuleResultType.NoAction });
   });
 });

@@ -1,7 +1,5 @@
 import Game from "../../src/core/game";
-import Snake from "../../src/core/snake";
-import { RuleResult } from "../../src/rules/rulesManager";
-import { SnakeUI } from "../../src/types";
+import { RuleResultType } from "../../src/rules/rulesManager";
 
 describe("Snake movement", () => {
   const snakeMock = {
@@ -31,7 +29,7 @@ describe("Snake movement", () => {
   });
 
   it("shold reset board, snake and ui if game is over", () => {
-    const loosingRuleSet = [() => RuleResult.GameOver];
+    const loosingRuleSet = [() => ({ type: RuleResultType.GameOver })];
     const game = new Game(snakeMock, uiMock, testBoardSize, loosingRuleSet);
 
     game.loop();
