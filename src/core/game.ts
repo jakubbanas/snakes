@@ -11,6 +11,7 @@ const boardElementColorMapping: { [key in BoardElement]: Color } = {
   [BoardElement.empty]: Color.WHITE,
   [BoardElement.apple]: Color.RED,
   [BoardElement.snake]: Color.BLACK,
+  [BoardElement.poison]: Color.GREEN,
 };
 
 export interface GameObject {

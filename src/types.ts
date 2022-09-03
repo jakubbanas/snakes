@@ -13,6 +13,7 @@ export enum Color {
   SILVER = "silver",
   PURPLE = "purple",
   RED = "red",
+  GREEN = "green",
 }
 
 export type MovementMaping = {

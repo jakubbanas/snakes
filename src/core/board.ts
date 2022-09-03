@@ -4,6 +4,7 @@ export enum BoardElement {
   snake = 1,
   apple = "a",
   empty = 0,
+  poison = "p",
 }
 
 class Board {

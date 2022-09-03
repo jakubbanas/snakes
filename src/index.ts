@@ -6,6 +6,7 @@ import { Direction } from "./types";
 import wallCollisionRule from "./rules/wallCollisionRule";
 import appleRule from "./rules/appleRule";
 import tailBiteRule from "./rules/tailBiteRule";
+import poisonousAppleRule from "./rules/poisonousAppleRule";
 
 const CELL_SIZE = 20;
 const BOARD_SIZE = 25;
@@ -19,7 +20,7 @@ new KeyboardController({
   [Direction.LEFT]: () => stefan.setMovingDirection(Direction.LEFT),
   [Direction.RIGHT]: () => stefan.setMovingDirection(Direction.RIGHT),
 });
-const rules = [wallCollisionRule, appleRule, tailBiteRule];
+const rules = [wallCollisionRule, appleRule, tailBiteRule, poisonousAppleRule];
 const ui = new CanvasUI(canvas, CELL_SIZE);
 const game = new Game(stefan, ui, BOARD_SIZE, rules);
 
