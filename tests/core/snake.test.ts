@@ -70,7 +70,7 @@ describe("Snake", () => {
     ]);
   });
 
-  it("should go right", () => {
+  it("should go left", () => {
     // | o |    |   |
     // | o | => | o |
     // | o |    |oo |
@@ -91,7 +91,7 @@ describe("Snake", () => {
     ]);
   });
 
-  it("should go left", () => {
+  it("should go right", () => {
     // | o |    |   |
     // | o | => | o |
     // | o |    | oo|
@@ -109,6 +109,27 @@ describe("Snake", () => {
       [5, 6],
       [5, 7],
       [6, 7],
+    ]);
+  });
+
+  fit("should not turn in tail direction", () => {
+    // |    |    |    |
+    // |ooo | => | ooo|
+    // |    |    |    |
+    const snake = new Snake("test_snake");
+    snake.setPosition([
+      [5, 5],
+      [6, 5],
+      [7, 5],
+    ]);
+
+    snake.setMovingDirection(Direction.LEFT);
+    snake.move();
+
+    expect(snake.getPosition()).toEqual([
+      [6, 5],
+      [7, 5],
+      [8, 5],
     ]);
   });
 });

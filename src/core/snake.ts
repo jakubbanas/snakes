@@ -23,8 +23,21 @@ class Snake {
     return this.position;
   }
 
-  public setMovingDirection(direction: Direction) {
+  public setMovingDirection(direction: Direction): void {
+    const [x, y] = this.getNextStep(direction);
+
+    const snakeSegments = this.position.map(([x, y]) => `${x}${y}`);
+    const tailBite = snakeSegments.includes(`${x}${y}`);
+
+    if (tailBite) {
+      return;
+    }
     this.movingDirection = direction;
+  }
+
+  private getNextStep(direction: Direction): Coordinate {
+    const headPosition = this.position[this.position.length - 1];
+    return movementMaping[direction](headPosition);
   }
 
   public setPosition(position: SnakePosition) {
@@ -46,12 +59,12 @@ class Snake {
   }
 
   public move(): void {
-    const headPosition = this.position[this.position.length - 1];
+    const nextStep = this.getNextStep(this.movingDirection);
     if (!this.isEating) {
       this.position.shift();
     }
     this.isEating = false;
-    this.position.push(movementMaping[this.movingDirection](headPosition));
+    this.position.push(nextStep);
   }
 }
 
