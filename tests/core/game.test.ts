@@ -1,6 +1,7 @@
 import { BoardElement } from "../../src/core/board";
 import Game from "../../src/core/game";
 import { RuleResultType } from "../../src/rules/rulesManager";
+import { Color } from "../../src/types";
 
 describe("Snake movement", () => {
   const snakeMock = {
@@ -76,5 +77,17 @@ describe("Snake movement", () => {
     game.loop();
 
     expect(boardMock.update).toBeCalledWith(1, 1, BoardElement.poison);
+  });
+
+  it("should draw something on the ui", () => {
+    boardMock.getState = () => [
+      [1, 0],
+      [0, 0],
+    ];
+    const game = new Game(snakeMock, uiMock, boardMock);
+
+    game.loop();
+
+    expect(uiMock.drawSquare).toBeCalledWith(0, 0, Color.BLACK);
   });
 });
