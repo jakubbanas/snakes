@@ -112,7 +112,7 @@ describe("Snake", () => {
     ]);
   });
 
-  fit("should not turn in tail direction", () => {
+  it("should not turn in tail direction", () => {
     // |    |    |    |
     // |ooo | => | ooo|
     // |    |    |    |
