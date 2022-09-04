@@ -1,8 +1,5 @@
-import { SnakePosition } from "../../src/core/snake";
-import RulesManager, {
-  Rule,
-  RuleResultType,
-} from "../../src/rules/rulesManager";
+import rulesManager from "../../src/rules/rulesManager";
+import { Rule, RuleResultType, SnakePosition } from "../../src/types";
 
 describe("RulesManager", () => {
   const testSnakePosition: SnakePosition = [[0, 0]];
@@ -13,7 +10,7 @@ describe("RulesManager", () => {
       type: RuleResultType.NoAction,
     });
 
-    const result = RulesManager.checkRules(testSnakePosition, testBoardState, [
+    const result = rulesManager.checkRules(testSnakePosition, testBoardState, [
       testRule,
     ]);
 
@@ -27,7 +24,7 @@ describe("RulesManager", () => {
       () => ({ type: RuleResultType.SnakeExtend }),
     ];
 
-    const result = RulesManager.checkRules(
+    const result = rulesManager.checkRules(
       testSnakePosition,
       testBoardState,
       testRules

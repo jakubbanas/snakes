@@ -1,7 +1,5 @@
-import { BoardElement } from "../../src/core/board";
 import Game from "../../src/core/game";
-import { RuleResultType } from "../../src/rules/rulesManager";
-import { Color } from "../../src/types";
+import { BoardElement, Color, RuleResultType } from "../../src/types";
 
 describe("Snake movement", () => {
   const snakeMock = {

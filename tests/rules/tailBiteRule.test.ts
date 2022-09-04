@@ -1,6 +1,5 @@
-import { SnakePosition } from "../../src/core/snake";
-import { RuleResultType } from "../../src/rules/rulesManager";
 import tailBiteRule from "../../src/rules/tailBiteRule";
+import { RuleResultType, SnakePosition } from "../../src/types";
 
 describe("TailBiteRule", () => {
   it("should return game over when snake bit its tail", () => {

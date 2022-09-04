@@ -1,20 +1,23 @@
-import { BoardState } from "../core/board";
-import { SnakePosition } from "../core/snake";
-import { RuleResult, RuleResultType } from "./rulesManager";
+import {
+  BoardState,
+  RuleResult,
+  RuleResultType,
+  SnakePosition,
+} from "../types";
 
 export default (
   snakePosition: SnakePosition,
   boardState: BoardState
 ): RuleResult => {
-  const boardHeigth = boardState.length;
+  const boardHeight = boardState.length;
   const boardWidth = boardState[0].length;
 
-  const colision = snakePosition.find((position) => {
+  const collision = snakePosition.find((position) => {
     const [x, y] = position;
-    return x >= boardWidth || y >= boardHeigth || x < 0 || y < 0;
+    return x >= boardWidth || y >= boardHeight || x < 0 || y < 0;
   });
 
-  if (colision) {
+  if (collision) {
     return { type: RuleResultType.GameOver };
   }
 

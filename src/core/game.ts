@@ -1,11 +1,16 @@
-import Snake from "./snake";
-import { Color, Coordinate, SnakeUI } from "../types";
-import Board, { BoardElement, BoardState } from "./board";
-import rulesManager, {
+import rulesManager from "../rules/rulesManager";
+import {
+  BoardElement,
+  BoardState,
+  Color,
+  GameObject,
   Rule,
   RuleResult,
   RuleResultType,
-} from "../rules/rulesManager";
+  SnakeUI,
+} from "../types";
+import Board from "./board";
+import Snake from "./snake";
 
 const boardElementColorMapping: { [key in BoardElement]: Color } = {
   [BoardElement.empty]: Color.WHITE,
@@ -13,11 +18,6 @@ const boardElementColorMapping: { [key in BoardElement]: Color } = {
   [BoardElement.snake]: Color.BLACK,
   [BoardElement.poison]: Color.GREEN,
 };
-
-export interface GameObject {
-  type: BoardElement;
-  position: Coordinate;
-}
 
 class Game {
   private board: Board;

@@ -1,9 +1,9 @@
-import { ControllerActionMaping, Direction } from "../types";
+import { ControllerActionMapping, Direction } from "../types";
 
 class TouchController {
   private initialX = null;
   private initialY = null;
-  private controllerActionMapping: ControllerActionMaping;
+  private controllerActionMapping: ControllerActionMapping;
 
   private startTouch(e: TouchEvent): void {
     this.initialX = e.touches[0].clientX;
@@ -47,7 +47,7 @@ class TouchController {
     e.preventDefault();
   }
 
-  constructor(controllerActionMapping: ControllerActionMaping) {
+  constructor(controllerActionMapping: ControllerActionMapping) {
     this.controllerActionMapping = controllerActionMapping;
     const canvas = document.getElementById("canvas");
     canvas.addEventListener("touchstart", this.startTouch.bind(this), false);

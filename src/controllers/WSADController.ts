@@ -1,5 +1,5 @@
 import {
-  ControllerActionMaping,
+  ControllerActionMapping,
   Direction,
   KeyEventDirectionMapping,
 } from "../types";
@@ -12,7 +12,7 @@ const keyEventDirectionMapping: KeyEventDirectionMapping = {
 };
 
 class WSADController {
-  constructor(controllerActionMapping: ControllerActionMaping) {
+  constructor(controllerActionMapping: ControllerActionMapping) {
     window.addEventListener("keypress", (e: KeyboardEvent) => {
       const { key } = e;
       const direction: Direction = keyEventDirectionMapping[key];

@@ -1,11 +1,4 @@
-export type BoardState = BoardElement[][];
-
-export enum BoardElement {
-  snake = 1,
-  apple = "a",
-  empty = 0,
-  poison = "p",
-}
+import { BoardElement, BoardState } from "../types";
 
 class Board {
   private state: BoardState;

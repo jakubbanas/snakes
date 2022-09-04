@@ -1,20 +1,21 @@
-import { BoardElement, BoardState } from "../core/board";
-import { SnakePosition } from "../core/snake";
-import { RuleResult, RuleResultType } from "./rulesManager";
-
-const randomNumber = (max) => Math.floor(Math.random() * (max - 1));
-
-const randomPosition = (x, y) => [randomNumber(x), randomNumber(y)];
+import {
+  BoardElement,
+  BoardState,
+  RuleResult,
+  RuleResultType,
+  SnakePosition,
+} from "../types";
+import { randomPosition } from "./utils";
 
 export default (
   snakePosition: SnakePosition,
   boardState: BoardState
 ): RuleResult => {
-  const boardHeigth = boardState.length;
+  const boardHeight = boardState.length;
   const boardWidth = boardState[0].length;
 
   if (!boardState.flat().includes(BoardElement.apple)) {
-    const [x, y] = randomPosition(boardWidth, boardHeigth);
+    const [x, y] = randomPosition(boardWidth, boardHeight);
 
     return {
       type: RuleResultType.CreateGameObject,

@@ -1,8 +1,11 @@
-import { Color, Coordinate, Direction, MovementMaping } from "../types";
+import {
+  Coordinate,
+  Direction,
+  MovementMapping,
+  SnakePosition,
+} from "../types";
 
-export type SnakePosition = Coordinate[];
-
-const movementMaping: MovementMaping = {
+const movementMapping: MovementMapping = {
   [Direction.DOWN]: ([x, y]) => [x, y + 1],
   [Direction.UP]: ([x, y]) => [x, y - 1],
   [Direction.LEFT]: ([x, y]) => [x - 1, y],
@@ -37,7 +40,7 @@ class Snake {
 
   private getNextStep(direction: Direction): Coordinate {
     const headPosition = this.position[this.position.length - 1];
-    return movementMaping[direction](headPosition);
+    return movementMapping[direction](headPosition);
   }
 
   public setPosition(position: SnakePosition) {

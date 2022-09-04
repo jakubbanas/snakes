@@ -1,3 +1,8 @@
+export interface GameObject {
+  type: BoardElement;
+  position: Coordinate;
+}
+
 export type Coordinate = [number, number];
 
 export enum Direction {
@@ -16,8 +21,8 @@ export enum Color {
   GREEN = "green",
 }
 
-export type MovementMaping = {
-  [key in Direction]: (Coordinate) => Coordinate;
+export type MovementMapping = {
+  [key in Direction]: (c: Coordinate) => Coordinate;
 };
 
 export interface SnakeUI {
@@ -28,6 +33,34 @@ export interface SnakeUI {
 
 export type KeyEventDirectionMapping = { [key: string]: Direction };
 export type ControllerAction = () => void;
-export type ControllerActionMaping = {
+export type ControllerActionMapping = {
   [key in Direction]: ControllerAction;
 };
+
+export type SnakePosition = Coordinate[];
+
+export enum RuleResultType {
+  GameOver,
+  SnakeExtend,
+  NoAction,
+  CreateGameObject,
+}
+
+export interface RuleResult {
+  type: RuleResultType;
+  payload?: GameObject;
+}
+
+export type Rule = (
+  snakePosition: SnakePosition,
+  boardState: BoardState
+) => RuleResult;
+
+export type BoardState = BoardElement[][];
+
+export enum BoardElement {
+  snake = 1,
+  apple = "a",
+  empty = 0,
+  poison = "p",
+}

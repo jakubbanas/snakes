@@ -1,7 +1,5 @@
-import { BoardElement } from "../../src/core/board";
-import { SnakePosition } from "../../src/core/snake";
 import poisonousAppleRule from "../../src/rules/poisonousAppleRule";
-import { RuleResultType } from "../../src/rules/rulesManager";
+import { BoardElement, RuleResultType, SnakePosition } from "../../src/types";
 
 describe("Poisonous apple collision rule", () => {
   const mathRandomSpy = jest.spyOn(Math, "random");
