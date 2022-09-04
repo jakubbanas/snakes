@@ -27,13 +27,8 @@ class Game {
   private rules: Rule[];
   private score: number = 0;
 
-  constructor(
-    snake: Snake,
-    ui: SnakeUI,
-    boardSize: number,
-    rules: Rule[] = []
-  ) {
-    this.board = new Board(boardSize);
+  constructor(snake: Snake, ui: SnakeUI, board: Board, rules: Rule[] = []) {
+    this.board = board;
     this.snake = snake;
     this.ui = ui;
     this.rules = rules;

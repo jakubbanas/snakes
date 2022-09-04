@@ -1,3 +1,4 @@
+import { BoardElement } from "../../src/core/board";
 import Game from "../../src/core/game";
 import { RuleResultType } from "../../src/rules/rulesManager";
 
@@ -13,14 +14,23 @@ describe("Snake movement", () => {
     drawSquare: jest.fn(),
     setScore: jest.fn(),
   } as any;
-  const testBoardSize = 5;
+  const boardMock = {
+    reset: jest.fn(),
+    drawSquare: jest.fn(),
+    setScore: jest.fn(),
+    update: jest.fn(),
+    getState: () => [
+      [0, 0],
+      [0, 0],
+    ],
+  } as any;
 
   afterEach(() => {
     jest.clearAllMocks();
   });
 
   it("shold move snake on every loop step", () => {
-    const game = new Game(snakeMock, uiMock, testBoardSize);
+    const game = new Game(snakeMock, uiMock, boardMock);
 
     game.loop();
 
@@ -28,14 +38,14 @@ describe("Snake movement", () => {
   });
 
   it("shold not move snake when there is no loop", () => {
-    new Game(snakeMock, uiMock, testBoardSize);
+    new Game(snakeMock, uiMock, boardMock);
 
     expect(snakeMock.move).not.toBeCalled();
   });
 
   it("shold reset board, snake and ui if game is over", () => {
     const loosingRuleSet = [() => ({ type: RuleResultType.GameOver })];
-    const game = new Game(snakeMock, uiMock, testBoardSize, loosingRuleSet);
+    const game = new Game(snakeMock, uiMock, boardMock, loosingRuleSet);
 
     game.loop();
 
@@ -47,15 +57,24 @@ describe("Snake movement", () => {
     const snakeExtendingRuleSet = [
       () => ({ type: RuleResultType.SnakeExtend }),
     ];
-    const game = new Game(
-      snakeMock,
-      uiMock,
-      testBoardSize,
-      snakeExtendingRuleSet
-    );
+    const game = new Game(snakeMock, uiMock, boardMock, snakeExtendingRuleSet);
 
     game.loop();
 
     expect(snakeMock.feed).toBeCalled();
+  });
+
+  it("should create an board object", () => {
+    const createObjectRuleSet = [
+      () => ({
+        type: RuleResultType.CreateGameObject,
+        payload: { position: [1, 1], type: BoardElement.poison },
+      }),
+    ] as any;
+    const game = new Game(snakeMock, uiMock, boardMock, createObjectRuleSet);
+
+    game.loop();
+
+    expect(boardMock.update).toBeCalledWith(1, 1, BoardElement.poison);
   });
 });

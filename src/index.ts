@@ -7,6 +7,7 @@ import wallCollisionRule from "./rules/wallCollisionRule";
 import appleRule from "./rules/appleRule";
 import tailBiteRule from "./rules/tailBiteRule";
 import poisonousAppleRule from "./rules/poisonousAppleRule";
+import Board from "./core/board";
 
 const CELL_SIZE = 20;
 const BOARD_SIZE = 25;
@@ -22,7 +23,8 @@ new KeyboardController({
 });
 const rules = [wallCollisionRule, appleRule, tailBiteRule, poisonousAppleRule];
 const ui = new CanvasUI(canvas, CELL_SIZE);
-const game = new Game(stefan, ui, BOARD_SIZE, rules);
+const board = new Board(BOARD_SIZE);
+const game = new Game(stefan, ui, board, rules);
 
 setInterval(() => {
   game.loop();
