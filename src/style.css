@@ -12,3 +12,9 @@ body {
     font-size: 2em;
     color: #fff;
 }
+
+@media screen and (max-width: 500px) {
+    #canvas {
+        width: 100%;
+    }
+  }

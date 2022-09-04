@@ -25,3 +25,9 @@ export interface SnakeUI {
   reset: () => void;
   setScore: (score: number) => void;
 }
+
+export type KeyEventDirectionMapping = { [key: string]: Direction };
+export type ControllerAction = () => void;
+export type ControllerActionMaping = {
+  [key in Direction]: ControllerAction;
+};

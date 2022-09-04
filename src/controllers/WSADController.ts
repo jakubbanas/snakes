@@ -1,10 +1,8 @@
-import { Direction } from "./types";
-
-type KeyEventDirectionMapping = { [key: string]: Direction };
-type ControllerAction = () => void;
-type ControllerActionMaping = {
-  [key in Direction]: ControllerAction;
-};
+import {
+  ControllerActionMaping,
+  Direction,
+  KeyEventDirectionMapping,
+} from "../types";
 
 const keyEventDirectionMapping: KeyEventDirectionMapping = {
   w: Direction.UP,
@@ -13,9 +11,9 @@ const keyEventDirectionMapping: KeyEventDirectionMapping = {
   d: Direction.RIGHT,
 };
 
-class KeyboardController {
+class WSADController {
   constructor(controllerActionMapping: ControllerActionMaping) {
-    window.addEventListener("keypress", (e) => {
+    window.addEventListener("keypress", (e: KeyboardEvent) => {
       const { key } = e;
       const direction: Direction = keyEventDirectionMapping[key];
       if (direction === undefined) {
@@ -27,4 +25,4 @@ class KeyboardController {
   }
 }
 
-export default KeyboardController;
+export default WSADController;
